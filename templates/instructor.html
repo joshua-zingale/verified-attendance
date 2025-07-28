@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Page - Attendance Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Instructor Panel</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="attendance-control">
+            <h2>Attendance Status: <span class="{{ 'status-open' if attendance_open else 'status-closed' }}">{{ 'OPEN' if attendance_open else 'CLOSED' }}</span></h2>
+            <form action="{{ url_for('instructor_page') }}" method="post">
+                {% if not attendance_open %}
+                    <button type="submit" name="start_attendance" class="btn btn-success">Start Attendance</button>
+                {% else %}
+                    <button type="submit" name="end_attendance" class="btn btn-danger">End Attendance</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="code-management">
+            <h2>Manage Attendance Codes</h2>
+            <form action="{{ url_for('instructor_page') }}" method="post" class="code-form">
+                <label for="num_codes">Number of Codes:</label>
+                <input type="number" id="num_codes" name="num_codes" value="5" min="1" max="100">
+                <label for="code_length">Code Length:</label>
+                <input type="number" id="code_length" name="code_length" value="6" min="4" max="10">
+                <button type="submit" name="generate_codes" class="btn btn-primary">Generate Codes</button>
+                <button type="submit" name="clear_codes" class="btn btn-warning">Clear All Codes</button>
+            </form>
+
+            <h3>Current Codes:</h3>
+            <div class="codes-display printable-area">
+                {% if codes %}
+                    <pre>{{ "\n".join(codes) }}</pre>
+                {% else %}
+                    <p>No codes generated yet.</p>
+                {% endif %}
+            </div>
+            <button onclick="window.print()" class="btn btn-secondary print-button">Print Codes</button>
+        </div>
+
+        <hr>
+
+        <div class="attendance-records">
+            <h2>Attendance Records ({{ submitted_attendance_count }} submissions)</h2>
+            <p>Download a CSV of all submitted attendance records.</p>
+            <a href="{{ url_for('download_attendance') }}" class="btn btn-info">Download Attendance CSV</a>
+            <form action="{{ url_for('instructor_page') }}" method="post" style="margin-top: 10px;">
+                <button type="submit" name="clear_all_attendance" class="btn btn-danger">Clear All Attendance Data</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

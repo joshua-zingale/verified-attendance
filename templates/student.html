@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance - Attendance Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Attendance Submission</h1>
+
+        {% if message %}
+            <div class="message {{ message_type }}">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if attendance_open %}
+            <p class="status-open">Attendance is currently **OPEN**.</p>
+            <form action="{{ url_for('student_page') }}" method="post" class="attendance-form">
+                <label for="student_email">Student Email:</label>
+                <input type="email" id="student_email" name="student_email" required>
+
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_id" required>
+
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="code">Random Code:</label>
+                <input type="text" id="code" name="code" required>
+
+                <button type="submit" class="btn btn-primary">Submit Attendance</button>
+            </form>
+        {% else %}
+            <p class="status-closed">Attendance is currently **CLOSED**.</p>
+            <p>Please check back later or contact your instructor.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
