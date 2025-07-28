@@ -18,27 +18,27 @@
 
         {% if attendance_open %}
             <p class="status-open">Attendance is currently **OPEN**.</p>
-            <form action="{{ url_for('student_page') }}" method="post" class="attendance-form">
+            <form action="{{ url_for('routes.student_page') }}" method="post" class="attendance-form">
                 <label for="student_email">Student Email:</label>
-                <input type="email" id="student_email" name="student_email" required>
+                <input type="email" id="student_email" name="student_email" required value="{{form_data.student_email}}">
 
                 <label for="student_id">Student ID:</label>
-                <input type="text" id="student_id" name="student_id" required>
+                <input type="text" id="student_id" name="student_id" required value="{{form_data.student_id}}">
 
                 <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" required>
+                <input type="text" id="first_name" name="first_name" required value="{{form_data.first_name}}">
 
                 <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" required>
+                <input type="text" id="last_name" name="last_name" required value="{{form_data.last_name}}">
 
                 <label for="code">Random Code:</label>
-                <input type="text" id="code" name="code" required>
+                <input type="text" id="code" name="code" required value="{{form_data.code}}">
 
                 <button type="submit" class="btn btn-primary">Submit Attendance</button>
             </form>
         {% else %}
             <p class="status-closed">Attendance is currently **CLOSED**.</p>
-            <p>Please check back later or contact your instructor.</p>
+            <p>Please check back later or contact your admin.</p>
         {% endif %}
     </div>
 </body>

@@ -1,5 +1,5 @@
 [project]
-name = "attendance-verifier"
+name = "verified_attendance"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

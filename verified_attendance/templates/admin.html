@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructor Page - Attendance Tracker</title>
+    <title>Admin Page - Attendance Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Instructor Panel</h1>
+        <h1>Admin Panel</h1>
+        <p class="logout-link"><a href="{{ url_for('routes.admin_logout') }}" class="btn btn-secondary">Logout</a></p>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -22,7 +23,7 @@
 
         <div class="attendance-control">
             <h2>Attendance Status: <span class="{{ 'status-open' if attendance_open else 'status-closed' }}">{{ 'OPEN' if attendance_open else 'CLOSED' }}</span></h2>
-            <form action="{{ url_for('instructor_page') }}" method="post">
+            <form action="{{ url_for('routes.admin_page') }}" method="post">
                 {% if not attendance_open %}
                     <button type="submit" name="start_attendance" class="btn btn-success">Start Attendance</button>
                 {% else %}
@@ -35,7 +36,7 @@
 
         <div class="code-management">
             <h2>Manage Attendance Codes</h2>
-            <form action="{{ url_for('instructor_page') }}" method="post" class="code-form">
+            <form action="{{ url_for('routes.admin_page') }}" method="post" class="code-form">
                 <label for="num_codes">Number of Codes:</label>
                 <input type="number" id="num_codes" name="num_codes" value="5" min="1" max="100">
                 <label for="code_length">Code Length:</label>
@@ -60,8 +61,8 @@
         <div class="attendance-records">
             <h2>Attendance Records ({{ submitted_attendance_count }} submissions)</h2>
             <p>Download a CSV of all submitted attendance records.</p>
-            <a href="{{ url_for('download_attendance') }}" class="btn btn-info">Download Attendance CSV</a>
-            <form action="{{ url_for('instructor_page') }}" method="post" style="margin-top: 10px;">
+            <a href="{{ url_for('routes.download_attendance') }}" class="btn btn-info">Download Attendance CSV</a>
+            <form action="{{ url_for('routes.admin_page') }}" method="post" style="margin-top: 10px;">
                 <button type="submit" name="clear_all_attendance" class="btn btn-danger">Clear All Attendance Data</button>
             </form>
         </div>

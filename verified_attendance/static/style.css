@@ -171,3 +171,8 @@ hr {
         color: #000;
     }
 }
+
+.logout-link {
+    text-align: right;
+    margin-bottom: 15px;
+}
