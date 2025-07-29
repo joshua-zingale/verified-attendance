@@ -15,7 +15,7 @@
             {% if messages %}
                 <ul class="flashes">
                 {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
+                    <li class="message {{ category }}">{{ message }}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
@@ -67,7 +67,17 @@
         <hr>
 
         <div class="attendance-records">
-            <h2>Attendance Records ({{ submitted_attendance_count }} submissions)</h2>
+            <h2>Attendance Records ({{ num_attendees }} submission{% if num_attendees != 1 %}s{% endif %})</h2>
+            <div class="codes-display printable-area">
+                {% for attendee in attendees %}
+                    {{attendee.last_name}}, {{attendee.first_name}} {{attendee.email}}
+                    {% if not loop.last %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+
+        
+            </div>
             <p>Download a CSV of all submitted attendance records.</p>
             <a href="{{ url_for('routes.download_attendance') }}" class="btn btn-info">Download Attendance CSV</a>
             <form action="{{ url_for('routes.admin_page') }}" method="post" style="margin-top: 10px;">

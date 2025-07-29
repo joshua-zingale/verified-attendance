@@ -12,7 +12,6 @@ import random
 import string
 import csv
 from io import StringIO
-from datetime import datetime
 import time
 from tinydb import Query
 from flask import Blueprint
@@ -89,16 +88,19 @@ def admin_page():
 
         return redirect(url_for("routes.admin_page"))
 
-    current_codes_list = codes_db.all()
-    current_codes_list.sort(key=lambda x: x["timestamp"])
+    codes_list = codes_db.all()
+    codes_list.sort(key=lambda x: x["timestamp"])
 
-    submitted_attendance_count = len(attendance_db.all())
+    attendance_list = attendance_db.all()
+    attendance_list.sort(key=lambda x: x["first_name"])
+    attendance_list.sort(key=lambda x: x["last_name"])
 
     return render_template(
         "admin.html",
         attendance_open=attendance_open,
-        codes=current_codes_list,
-        submitted_attendance_count=submitted_attendance_count,
+        codes=codes_list,
+        attendees=attendance_list,
+        num_attendees=len(attendance_list),
     )
 
 
@@ -165,7 +167,7 @@ def student_page():
                             "student_id": student_id,
                             "first_name": first_name,
                             "last_name": last_name,
-                            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            "timestamp": time.time(),
                         }
                     )
                     message = f"Attendance submitted successfully for {student_email} with ID {student_id}!"
