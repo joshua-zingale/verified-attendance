@@ -14,4 +14,14 @@ The purpose of Verified Attendance is to track attendance in a way that one coul
     - A code is required for submission and can only be used once, preventing sharing.
 4. After attendance has been taken, the admin may close the form, download the attendance, and reset the codes/attendance for the next class.
 
-At any time, the admin can generate more codes, delete all of the codes, download a CSV file of the attendance, or reset the attendance.
+At any time, the admin can open and close the attendance form, generate more codes, delete all of the codes, download a CSV file of the attendance, or reset the attendance.
+
+## Closed Attendance Form
+
+![Closed Attendance Form](images/attendance-not-being-taken.png)
+
+## Filled Out Attendance Form
+![Filled Out Attendance Form](images/filled-out-form.png)
+
+## Administrator Portal
+![Administrator Portal](images/admin-portal.png)
