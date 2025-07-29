@@ -47,11 +47,19 @@
 
             <h3>Current Codes:</h3>
             <div class="codes-display printable-area">
-                {% if codes %}
-                    <pre>{{ "\n".join(codes) }}</pre>
-                {% else %}
-                    <p>No codes generated yet.</p>
-                {% endif %}
+                
+                {% for code in codes %}
+                    {% if code.used %}
+                        <s>{{code.code}}</s>
+                    {% else %}
+                        {{code.code}}
+                    {% endif %}
+                    {% if not loop.last %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+
+        
             </div>
             <button onclick="window.print()" class="btn btn-secondary print-button">Print Codes</button>
         </div>

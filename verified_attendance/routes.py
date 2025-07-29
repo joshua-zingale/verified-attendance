@@ -89,10 +89,8 @@ def admin_page():
 
         return redirect(url_for("routes.admin_page"))
 
-    current_codes_list = [(d["code"], d["timestamp"]) for d in codes_db.all()]
-    current_codes_list = list(
-        map(lambda x: x[0], sorted(current_codes_list, key=lambda x: x[1]))
-    )
+    current_codes_list = codes_db.all()
+    current_codes_list.sort(key=lambda x: x["timestamp"])
 
     submitted_attendance_count = len(attendance_db.all())
 
