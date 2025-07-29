@@ -47,7 +47,6 @@
 
             <h3>Current Codes:</h3>
             <div class="codes-display printable-area">
-                
                 {% for code in codes %}
                     {% if code.used %}
                         <s>{{code.code}}</s>
@@ -58,8 +57,6 @@
                         <br>
                     {% endif %}
                 {% endfor %}
-
-        
             </div>
             <button onclick="window.print()" class="btn btn-secondary print-button">Print Codes</button>
         </div>
@@ -75,8 +72,6 @@
                         <br>
                     {% endif %}
                 {% endfor %}
-
-        
             </div>
             <p>Download a CSV of all submitted attendance records.</p>
             <a href="{{ url_for('routes.download_attendance') }}" class="btn btn-info">Download Attendance CSV</a>

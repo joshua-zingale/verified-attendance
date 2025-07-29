@@ -12,6 +12,5 @@ wheels/
 # Virtual environments
 .venv
 
-
 # Application data
 databases/**.json

@@ -17,7 +17,7 @@
         {% endif %}
 
         {% if attendance_open %}
-            <p class="status-open">Attendance is currently **OPEN**.</p>
+            <p class="status-open">Attendance is currently being taken.</p>
             <form action="{{ url_for('routes.student_page') }}" method="post" class="attendance-form">
                 <label for="student_email">Student Email:</label>
                 <input type="email" id="student_email" name="student_email" required value="{{form_data.student_email}}">
@@ -37,8 +37,8 @@
                 <button type="submit" class="btn btn-primary">Submit Attendance</button>
             </form>
         {% else %}
-            <p class="status-closed">Attendance is currently **CLOSED**.</p>
-            <p>Please check back later or contact your admin.</p>
+            <p class="status-closed">Attendance is currently not being taken.</p>
+            <p>Please check back later or contact the admin.</p>
         {% endif %}
     </div>
 </body>
