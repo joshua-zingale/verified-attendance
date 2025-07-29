@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "${VERIFIED_ATTENDANCE_PORT:-5000}:5000"
+    volumes:
+      - ./databases:/app/databases
+    environment:
+      - FLASK_APP=src
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    command: gunicorn --bind 0.0.0.0:5000 "src:create_app()"
