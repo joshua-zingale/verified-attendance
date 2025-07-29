@@ -10,4 +10,4 @@ EXPOSE 5000
 
 ENV FLASK_APP=src
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src:create_app()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.verified_attendance:create_app()"]

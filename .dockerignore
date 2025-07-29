@@ -15,6 +15,9 @@ wheels/
 # Application data
 databases/*.json
 
+# Application tests
+tests/*
+
 # Git files
 .gitignore
 images/*
