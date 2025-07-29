@@ -101,7 +101,18 @@ def admin_page():
         codes=codes_list,
         attendees=attendance_list,
         num_attendees=len(attendance_list),
+        print_codes_url=url_for("routes.print_codes"),
     )
+
+
+@bp.route("/print_codes")
+def print_codes():
+    codes_db = get_codes_db()
+    codes_list = codes_db.all()
+    codes_list.sort(key=lambda x: x["timestamp"])
+    if not session.get("logged_in"):
+        return redirect(url_for("routes.admin_login"))
+    return render_template("codes.html", codes=codes_list)
 
 
 @bp.route("/", methods=["GET", "POST"])
@@ -147,9 +158,7 @@ def student_page():
                 message = "All fields are required."
                 message_type = "danger"
             else:
-                # Check if the code exists and is not used
                 code_record = codes_db.search(Code.code == submitted_code)
-
                 if attendance_db.search(Student.student_id == student_id):
                     message = "The student with this ID has already been recorded."
                     message_type = "info"

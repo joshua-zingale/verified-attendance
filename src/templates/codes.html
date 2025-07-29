@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Print Codes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div style="font-size:100px">
+{% for code in codes %}
+{% if code.used %}
+<s>{{code.code}}</s>
+{% else %}
+{{code.code}}
+{% endif %}
+{% if not loop.last %}
+<br>
+{% endif %}
+{% endfor %}
+</div>
+
+<script>window.print()</script>
+</body>
+
+</html>
