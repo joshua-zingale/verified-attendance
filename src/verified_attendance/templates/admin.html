@@ -38,7 +38,7 @@
             <h2>Manage Attendance Codes</h2>
             <form action="{{ url_for('routes.admin_page') }}" method="post" class="code-form">
                 <label for="num_codes">Number of Codes:</label>
-                <input type="number" id="num_codes" name="num_codes" value="5" min="1" max="100">
+                <input type="number" id="num_codes" name="num_codes" value="5" min="1" max="1000">
                 <label for="code_length">Code Length:</label>
                 <input type="number" id="code_length" name="code_length" value="6" min="4" max="10">
                 <button type="submit" name="generate_codes" class="btn btn-primary">Generate Codes</button>
