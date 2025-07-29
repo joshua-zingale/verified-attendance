@@ -82,9 +82,7 @@ def admin_page():
             flash("All codes cleared!", "danger")
         elif "clear_all_attendance" in request.form:
             attendance_db.truncate()
-            codes_db.truncate()
-            attendance_open = False
-            flash("All attendance records, codes, and status reset!", "danger")
+            flash("All attendance records cleared!", "danger")
 
         return redirect(url_for("routes.admin_page"))
 
